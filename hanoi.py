@@ -2,7 +2,10 @@ import sys
 
 
 class HanoiState:
-    def __init__(self, n: int):
+    """
+    Store the current state of Game
+    """
+    def __init__(self, n: int, graphics: bool):
 
         self.total_moves = 0
 
@@ -17,8 +20,9 @@ class HanoiState:
         ]
 
         # print Initial State
-        print("Initial State")
-        self.display()
+        if graphics:
+            print("Initial State")
+            self.display()
     
     def move(self, start: int, end: int):
         """
@@ -59,10 +63,13 @@ class HanoiState:
 
 
 class Hanoi:
-    def __init__(self, n: int):
+    def __init__(self, n: int, graphics: bool):
         
+        # Weather to print states of Game or not 
+        self.graphics = graphics
+
         # Initialize state of towers
-        self.state = HanoiState(n)   
+        self.state = HanoiState(n, graphics)   
         
         # Number of Disks
         self.n = n
@@ -71,6 +78,7 @@ class Hanoi:
         """
         Recursive solver function 
         """
+
         # Use self.n on first call 
         if n == None: 
             n = self.n
@@ -95,19 +103,35 @@ class Hanoi:
         """
         Move the disk and print that move along with state
         """ 
+
         self.state.move(start, end)
         print(f"{start} -> {end}")
-        self.state.display()
+        if self.graphics:
+            self.state.display()
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python3 hanoi.py <N>")
-        print("N = number of disks")
+    
+    numberOfDisks = 0
+    graphics = True
+
+    if len(sys.argv) == 2:
+        numberOfDisks = int(sys.argv[1])
+
+    elif len(sys.argv) == 3:
+        numberOfDisks = int(sys.argv[1])
+        graphics = sys.argv[2] == "True"
+
+    else:
+        print("Usage: python3 hanoi.py <N> <G>")
+        print("N = number of disks (Accept a Natural Number E.g 1, 2, 3, ...)")
+        print(f"G = print terminal graphics")
         sys.exit()
 
-    numberOfDisks = int(sys.argv[1])
-    game = Hanoi(numberOfDisks)
+    if numberOfDisks < 1: 
+        print("Invalid number of Disks")
+
+    game = Hanoi(numberOfDisks, graphics)
     game.solve()
     print(f"Total Moves Performed = {game.state.total_moves}")
 
