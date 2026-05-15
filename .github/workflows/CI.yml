@@ -27,8 +27,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt install -y  python3 pytest
+        run: sudo apt install -y  python3 
 
       - name: Test Hanoi
-        run: pytest test.py  
+        run: pytest test.py
             
