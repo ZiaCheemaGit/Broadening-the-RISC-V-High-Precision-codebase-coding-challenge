@@ -4,6 +4,8 @@ import sys
 class HanoiState:
     def __init__(self, n: int):
 
+        self.total_moves = 0
+
         # Number of Disks
         self.n = n
 
@@ -25,6 +27,7 @@ class HanoiState:
 
         disk = self.towers[start - 1].pop()
         self.towers[end - 1].append(disk)
+        self.total_moves += 1
 
     def display(self):
         """
@@ -106,7 +109,7 @@ def main():
     numberOfDisks = int(sys.argv[1])
     game = Hanoi(numberOfDisks)
     game.solve()
-
+    print(f"Total Moves Performed = {game.state.total_moves}")
 
 if __name__ == "__main__":
     main()
