@@ -1,10 +1,10 @@
 import nox
 
-@nox.Session
-def test_number_of_moves():
+@nox.session
+def test_number_of_moves(session: nox.Session):
     pass
 
-
-def test_final_state():
+@nox.session
+def test_final_state(session: nox.Session):
     pass
 
