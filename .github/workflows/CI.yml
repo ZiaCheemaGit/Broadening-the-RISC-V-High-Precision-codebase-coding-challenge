@@ -27,15 +27,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt install -y  python3 python3-pip
+        run: sudo apt install -y  python3 pytest
 
-      - name: Install nox
-        run: pip install nox
-
-      - name: Perfect moves Test
-        run: nox -s test_number_of_moves
-
-      - name: Solution Test
-        run: nox -s test_final_state
-  
+      - name: Test Hanoi
+        run: pytest test.py  
             
